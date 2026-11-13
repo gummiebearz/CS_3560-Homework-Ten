@@ -42,7 +42,7 @@ public class MessageTest {
     }
 
     @Test
-    void getTimestamp() {
+    void testGetTimestamp() {
         User sender = new User();
         User recipient = new User();
 
@@ -52,7 +52,7 @@ public class MessageTest {
     }
 
     @Test
-    void getMessageContent() {
+    void testGetMessageContent() {
         User sender = new User();
         User recipient = new User();
 
