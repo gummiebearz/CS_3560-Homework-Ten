@@ -15,18 +15,18 @@ public class Message {
     }
 
     public User getSender() {
-        return null;
+        return this.sender;
     }
 
     public List<User> getRecipients() {
-        return null;
+        return this.recipients;
     }
 
     public LocalDateTime getTimestamp() {
-        return null;
+        return this.timestamp;
     }
 
     public String getContent() {
-        return "";
+        return this.content;
     }
 }
