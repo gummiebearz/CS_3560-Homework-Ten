@@ -10,8 +10,8 @@ public class MessageTest {
 
     @Test
     void testGetMessageSender() {
-        User sender = new User();
-        User recipient = new User();
+        User sender = new User("Sender");
+        User recipient = new User("Recipient");
 
         Message message = new Message(sender, List.of(recipient), TIMESTAMP, MSG_CONTENT);
 
@@ -20,8 +20,8 @@ public class MessageTest {
 
     @Test
     void testGetSingleRecipient() {
-        User sender = new User();
-        User recipient = new User();
+        User sender = new User("Sender");
+        User recipient = new User("Recipient");
 
         Message message = new Message(sender, List.of(recipient), TIMESTAMP, MSG_CONTENT);
 
@@ -30,9 +30,9 @@ public class MessageTest {
 
     @Test
     void testGetMultipleRecipients() {
-        User sender = new User();
-        User firstRecipient = new User();
-        User secondRecipient = new User();
+        User sender = new User("Sender");
+        User firstRecipient = new User("First Recipient");
+        User secondRecipient = new User("Second Recipient");
 
         List<User> recipients = List.of(firstRecipient, secondRecipient);
 
@@ -43,8 +43,8 @@ public class MessageTest {
 
     @Test
     void testGetTimestamp() {
-        User sender = new User();
-        User recipient = new User();
+        User sender = new User("Sender");
+        User recipient = new User("Recipient");
 
         Message message = new Message(sender, List.of(recipient), TIMESTAMP, MSG_CONTENT);
 
@@ -53,8 +53,8 @@ public class MessageTest {
 
     @Test
     void testGetMessageContent() {
-        User sender = new User();
-        User recipient = new User();
+        User sender = new User("Sender");
+        User recipient = new User("Recipient");
 
         Message message = new Message(sender, List.of(recipient), TIMESTAMP, MSG_CONTENT);
 
