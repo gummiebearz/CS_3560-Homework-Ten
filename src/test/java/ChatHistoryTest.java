@@ -34,4 +34,24 @@ public class ChatHistoryTest {
 
         assertSame(secondMessage, chatHistory.getLastMessageSent());
     }
+
+    @Test
+    void testGetLastMessageSentReturnsNullWhenOnlyReceivedMessages() {
+        User sender = new User("Sender");
+        User recipient = new User("Recipient");
+        ChatHistory chatHistory = new ChatHistory(sender);
+
+        Message receivedMessage = new Message(recipient, List.of(sender), TIMESTAMP, "Recieved Message");
+        chatHistory.addMessageToHistory(receivedMessage);
+
+        assertNull(chatHistory.getLastMessageSent());
+    }
+
+    @Test
+    void testGetLastMessageSentReturnsNullWhenHistoryIsEmpty() {
+        User sender = new User("Sender");
+        ChatHistory chatHistory = new ChatHistory(sender);
+
+        assertNull(chatHistory.getLastMessageSent());
+    }
 }
