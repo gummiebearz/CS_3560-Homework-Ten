@@ -41,7 +41,7 @@ public class ChatHistoryTest {
         User recipient = new User("Recipient");
         ChatHistory chatHistory = new ChatHistory(sender);
 
-        Message receivedMessage = new Message(recipient, List.of(sender), TIMESTAMP, "Recieved Message");
+        Message receivedMessage = new Message(recipient, List.of(sender), TIMESTAMP, "Received Message");
         chatHistory.addMessageToHistory(receivedMessage);
 
         assertNull(chatHistory.getLastMessageSent());
