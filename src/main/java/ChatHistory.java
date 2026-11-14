@@ -19,6 +19,18 @@ public class ChatHistory {
     }
 
     public Message getLastMessageSent() {
-        return this.messages.isEmpty() ? null : this.messages.get(this.messages.size() - 1);
+        if(isChatHistoryEmpty()) {
+            return null;
+        }
+
+        for(int i = this.messages.size() -1; i >= 0; --i) {
+            Message message = this.messages.get(i);
+
+            if(message.getSender().equals(this.owner)) {
+                return message;
+            }
+        }
+
+        return null;
     }
 }
