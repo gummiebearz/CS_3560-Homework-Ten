@@ -16,4 +16,8 @@ public class User {
     public ChatHistory getChatHistory() {
         return this.chatHistory;
     }
+
+    // Added stub methods
+    public void sendMessage(String messageToSend) {}
+    public void receiveMessage(String messageToReceive) {}
 }
