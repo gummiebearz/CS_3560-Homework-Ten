@@ -13,8 +13,8 @@ public class MessageTest {
 
     @Test
     void testGetMessageSender() {
-        User sender = new User("Sender");
-        User recipient = new User("Recipient");
+        User sender = new User("Sender", mediator);
+        User recipient = new User("Recipient", mediator);
 
         Message message = new Message(sender, List.of(recipient), TIMESTAMP, MSG_CONTENT);
 
@@ -23,8 +23,8 @@ public class MessageTest {
 
     @Test
     void testGetSingleRecipient() {
-        User sender = new User("Sender");
-        User recipient = new User("Recipient");
+        User sender = new User("Sender", mediator);
+        User recipient = new User("Recipient", mediator);
 
         Message message = new Message(sender, List.of(recipient), TIMESTAMP, MSG_CONTENT);
 
@@ -33,9 +33,9 @@ public class MessageTest {
 
     @Test
     void testGetMultipleRecipients() {
-        User sender = new User("Sender");
-        User firstRecipient = new User("First Recipient");
-        User secondRecipient = new User("Second Recipient");
+        User sender = new User("Sender", mediator);
+        User firstRecipient = new User("First Recipient", mediator);
+        User secondRecipient = new User("Second Recipient", mediator);
 
         List<User> recipients = List.of(firstRecipient, secondRecipient);
 
@@ -46,8 +46,8 @@ public class MessageTest {
 
     @Test
     void testGetTimestamp() {
-        User sender = new User("Sender");
-        User recipient = new User("Recipient");
+        User sender = new User("Sender", mediator);
+        User recipient = new User("Recipient", mediator);
 
         Message message = new Message(sender, List.of(recipient), TIMESTAMP, MSG_CONTENT);
 
@@ -56,8 +56,8 @@ public class MessageTest {
 
     @Test
     void testGetMessageContent() {
-        User sender = new User("Sender");
-        User recipient = new User("Recipient");
+        User sender = new User("Sender", mediator);
+        User recipient = new User("Recipient", mediator);
 
         Message message = new Message(sender, List.of(recipient), TIMESTAMP, MSG_CONTENT);
 

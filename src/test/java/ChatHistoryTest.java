@@ -12,8 +12,8 @@ public class ChatHistoryTest {
 
     @Test
     void testGetLastMessageSentOnOneMessage() {
-        User sender = new User("Sender");
-        User recipient = new User("Recipient");
+        User sender = new User("Sender", mediator);
+        User recipient = new User("Recipient", mediator);
         ChatHistory chatHistory = new ChatHistory(sender);
 
         Message firstMessage = new Message(sender, List.of(recipient), TIMESTAMP, "First Message");
@@ -25,8 +25,8 @@ public class ChatHistoryTest {
 
     @Test
     void testGetLastMessageSentOnTwoMessages() {
-        User sender = new User("Sender");
-        User recipient = new User("Recipient");
+        User sender = new User("Sender", mediator);
+        User recipient = new User("Recipient", mediator);
         ChatHistory chatHistory = new ChatHistory(sender);
 
         Message firstMessage = new Message(sender, List.of(recipient), TIMESTAMP, "First Message");
@@ -40,8 +40,8 @@ public class ChatHistoryTest {
 
     @Test
     void testGetLastMessageSentReturnsNullWhenOnlyReceivedMessages() {
-        User sender = new User("Sender");
-        User recipient = new User("Recipient");
+        User sender = new User("Sender", mediator);
+        User recipient = new User("Recipient", mediator);
         ChatHistory chatHistory = new ChatHistory(sender);
 
         Message receivedMessage = new Message(recipient, List.of(sender), TIMESTAMP, "Received Message");
@@ -52,7 +52,7 @@ public class ChatHistoryTest {
 
     @Test
     void testGetLastMessageSentReturnsNullWhenHistoryIsEmpty() {
-        User sender = new User("Sender");
+        User sender = new User("Sender", mediator);
         ChatHistory chatHistory = new ChatHistory(sender);
 
         assertNull(chatHistory.getLastMessageSent());

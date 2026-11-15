@@ -13,30 +13,30 @@ public class UserTest {
 
     @Test
     void testGetUsername() {
-        User user = new User(NAME);
+        User user = new User(NAME, mediator);
 
         assertEquals(NAME, user.getName());
     }
 
     @Test
     void testGetChatHistoryIsNotNull() {
-        User user = new User(NAME);
+        User user = new User(NAME, mediator);
 
         assertNotNull(user.getChatHistory());
     }
 
     @Test
     void testEachUserHasOwnChatHistory() {
-        User firstUser = new User("First User");
-        User secondUser = new User("Second User");
+        User firstUser = new User("First User", mediator);
+        User secondUser = new User("Second User", mediator);
 
         assertNotSame(firstUser.getChatHistory(), secondUser.getChatHistory());
     }
 
     @Test
     void testChatHistoryBelongsToItsUser() {
-        User firstUser = new User("First User");
-        User secondUser = new User("Second User");
+        User firstUser = new User("First User", mediator);
+        User secondUser = new User("Second User", mediator);
 
         Message sentToSecondUser = new Message(firstUser, List.of(secondUser), TIMESTAMP, "Hi " + secondUser.getName());
         Message sentToFirstUser = new Message(secondUser, List.of(firstUser), TIMESTAMP, "Hi " + firstUser.getName());
