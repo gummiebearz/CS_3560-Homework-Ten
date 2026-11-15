@@ -1,10 +1,12 @@
 public class User {
     private String name;
     private ChatHistory chatHistory;
+    private ChatMediator chatMediator;
 
-    public User(String name) {
+    public User(String name, ChatMediator chatMediator) {
         this.name = name;
         this.chatHistory = new ChatHistory(this);
+        this.chatMediator = chatMediator;
     }
 
     public String getName() {
