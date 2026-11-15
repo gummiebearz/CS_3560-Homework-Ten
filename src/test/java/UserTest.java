@@ -7,7 +7,7 @@ import java.util.List;
 public class UserTest {
     private static final String NAME = "John Doe";
     @Test
-    void getUsername() {
+    void testGetUsername() {
         User user = new User(NAME);
 
         assertEquals(NAME, user.getName());

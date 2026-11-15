@@ -8,7 +8,7 @@ public class ChatHistoryTest {
     private static final LocalDateTime TIMESTAMP = LocalDateTime.now();
 
     @Test
-    void getLastMessageSentOnOneMessage() {
+    void testGetLastMessageSentOnOneMessage() {
         User sender = new User("Sender");
         User recipient = new User("Recipient");
         ChatHistory chatHistory = new ChatHistory(sender);
