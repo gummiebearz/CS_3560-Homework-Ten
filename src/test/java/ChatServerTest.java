@@ -80,4 +80,38 @@ public class ChatServerTest {
 
         assertTrue(nonRecipient.getReceivedMessages().isEmpty());
     }
+
+    @Test
+    void testUnregisterUserStopsDelivery() {
+        User sender = new User("Sender", server);
+        RecordingUser recipient = new RecordingUser("Recipient", server);
+        server.registerUser(sender);
+        server.registerUser(recipient);
+
+        server.unregisterUser(recipient);
+
+        Message message = new Message(sender, List.of(recipient), TIMESTAMP, "Hello");
+        server.sendMessage(message);
+
+        assertTrue(recipient.getReceivedMessages().isEmpty());
+    }
+
+    @Test
+    void testUnregisterUserDoesNotAffectOtherUsers() {
+        User sender = new User("Sender", server);
+        RecordingUser firstRecipient = new RecordingUser("First Recipient", server);
+        RecordingUser secondRecipient = new RecordingUser("Second Recipient", server);
+
+        server.registerUser(sender);
+        server.registerUser(firstRecipient);
+        server.registerUser(secondRecipient);
+
+        server.unregisterUser(firstRecipient);
+
+        Message message = new Message(sender, List.of(firstRecipient, secondRecipient), TIMESTAMP, "Hello");
+        server.sendMessage(message);
+
+        assertTrue(firstRecipient.getReceivedMessages().isEmpty());
+        assertEquals(secondRecipient.getReceivedMessages(), List.of(message));
+    }
 }
