@@ -7,6 +7,9 @@ import java.util.List;
 public class ChatHistoryTest {
     private static final LocalDateTime TIMESTAMP = LocalDateTime.now();
 
+    // Added reference to mediator
+    private final ChatMediator mediator = new ChatServer();
+
     @Test
     void testGetLastMessageSentOnOneMessage() {
         User sender = new User("Sender");

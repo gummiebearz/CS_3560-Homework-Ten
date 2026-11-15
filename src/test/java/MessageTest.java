@@ -8,6 +8,9 @@ public class MessageTest {
     private static final LocalDateTime TIMESTAMP = LocalDateTime.now();
     private static final String MSG_CONTENT = "Hello";
 
+    // Added reference to mediator
+    private final ChatMediator mediator = new ChatServer();
+
     @Test
     void testGetMessageSender() {
         User sender = new User("Sender");

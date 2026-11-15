@@ -8,6 +8,9 @@ public class UserTest {
     private static final String NAME = "John Doe";
     private static final LocalDateTime TIMESTAMP = LocalDateTime.now();
 
+    // Added reference to mediator
+    private final ChatMediator mediator = new ChatServer();
+
     @Test
     void testGetUsername() {
         User user = new User(NAME);
