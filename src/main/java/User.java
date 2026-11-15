@@ -18,6 +18,6 @@ public class User {
     }
 
     // Added stub methods
-    public void sendMessage(String messageToSend) {}
-    public void receiveMessage(String messageToReceive) {}
+    public void sendMessage(Message messageToSend) {}
+    public void receiveMessage(Message messageToReceive) {}
 }

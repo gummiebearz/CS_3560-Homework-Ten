@@ -16,8 +16,9 @@ public class ChatServerTest {
             super(name, mediator);
         }
 
-        public void receive(Message message) {
-            this.receivedMessages.add(message);
+        @Override
+        public void receiveMessage(Message messageToReceive) {
+            this.receivedMessages.add(messageToReceive);
         }
 
         List<Message> getReceivedMessages() {
