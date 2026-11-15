@@ -1,3 +1,5 @@
+import java.util.List;
+
 public class User {
     private String name;
     private ChatHistory chatHistory;
@@ -18,6 +20,6 @@ public class User {
     }
 
     // Added stub methods
-    public void sendMessage(Message messageToSend) {}
+    public void sendMessage(List<User> recipients, String messageToSend) {}
     public void receiveMessage(Message messageToReceive) {}
 }
