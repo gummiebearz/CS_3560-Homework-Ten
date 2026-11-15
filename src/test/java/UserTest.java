@@ -38,6 +38,10 @@ public class UserTest {
         Message sentToSecondUser = new Message(firstUser, List.of(secondUser), TIMESTAMP, "Hi " + secondUser.getName());
         Message sentToFirstUser = new Message(secondUser, List.of(firstUser), TIMESTAMP, "Hi " + firstUser.getName());
 
+        // Add message to corresponding chat history
+        firstUser.getChatHistory().addMessageToHistory(sentToSecondUser);
+        secondUser.getChatHistory().addMessageToHistory(sentToFirstUser);
+
         assertSame(sentToSecondUser, firstUser.getChatHistory().getLastMessageSent());
         assertSame(sentToFirstUser, secondUser.getChatHistory().getLastMessageSent());
     }
