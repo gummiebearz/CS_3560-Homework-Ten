@@ -16,7 +16,9 @@ public class ChatServer implements ChatMediator {
     }
 
     @Override
-    public void unregisterUser(User userToUnregister) {}
+    public void unregisterUser(User userToUnregister) {
+        this.registeredUsers.removeIf(user -> user.equals(userToUnregister));
+    }
 
     @Override
     public void sendMessage(Message messageToSend) {
