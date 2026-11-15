@@ -1,19 +1,31 @@
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
 public class ChatServer implements ChatMediator {
     private Map<User, List<User>> blockList;
+    private List<User> registeredUsers;
 
-    public ChatServer() {}
+    public ChatServer() {
+        this.registeredUsers = new ArrayList<>();
+    }
 
     @Override
-    public void registerUser(User userToRegister) {}
+    public void registerUser(User userToRegister) {
+        this.registeredUsers.add(userToRegister);
+    }
 
     @Override
     public void unregisterUser(User userToUnregister) {}
 
     @Override
-    public void sendMessage(Message messageToSend) {}
+    public void sendMessage(Message messageToSend) {
+        for(User recipient : messageToSend.getRecipients()) {
+            if(this.registeredUsers.contains(recipient)) {
+                recipient.receiveMessage(messageToSend);
+            }
+        }
+    }
 
     @Override
     public void blockUser(User user, User userToBlock) {}
