@@ -48,4 +48,13 @@ public class UserTest {
         assertSame(sentToSecondUser, firstUser.getChatHistory().getLastMessageSent());
         assertSame(sentToFirstUser, secondUser.getChatHistory().getLastMessageSent());
     }
+
+    @Test
+    void testSendMessageAddsMessageToSenderHistory() {
+        User sender = new User("Sender", mediator);
+        User recipient = new User("Recipient", mediator);
+
+        sender.sendMessage(List.of(recipient), "Hello");
+        assertNotNull(sender.getChatHistory().getLastMessageSent());
+    }
 }
