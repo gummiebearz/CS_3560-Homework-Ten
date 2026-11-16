@@ -124,4 +124,59 @@ public class UserTest {
 
         assertEquals(1, sender.getChatHistory().getMessages().size());
     }
+
+    @Test
+    void testUndoRemovesLastMessageSent() {
+        User sender = new User("Sender", server);
+        User recipient = new User("Recipient", server);
+
+        server.registerUser(sender);
+        server.registerUser(recipient);
+
+        sender.sendMessage(List.of(recipient), "Hello");
+        sender.undoLastMessageSent();
+
+        assertNull(sender.getChatHistory().getLastMessageSent());
+    }
+
+    @Test
+    void testUndoRestoresPreviousSentMessage() {
+        User sender = new User("Sender", server);
+        User recipient = new User("Recipient", server);
+
+        server.registerUser(sender);
+        server.registerUser(recipient);
+
+        sender.sendMessage(List.of(recipient), "First Hello");
+        sender.sendMessage(List.of(recipient), "Second Hello");
+        sender.undoLastMessageSent();
+
+        assertEquals("First Hello", sender.getChatHistory().getLastMessageSent().getContent());
+    }
+
+    @Test
+    void testUndoDoesNotAffectRecipientHistory() {
+        User sender = new User("Sender", server);
+        User recipient = new User("Recipient", server);
+
+        server.registerUser(sender);
+        server.registerUser(recipient);
+
+        sender.sendMessage(List.of(recipient), "Hello");
+        sender.undoLastMessageSent();
+
+        assertEquals(1, recipient.getChatHistory().getMessages().size());
+    }
+
+    @Test
+    void testUndoWithNothingSentDoesNothing() {
+        User sender = new User("Sender", server);
+        User recipient = new User("Recipient", server);
+
+        server.registerUser(sender);
+        server.registerUser(recipient);
+
+        assertDoesNotThrow(sender::undoLastMessageSent);
+        assertNull(sender.getChatHistory().getLastMessageSent());
+    }
 }
