@@ -14,4 +14,7 @@ public class User {
     public ChatHistory getChatHistory() {
         return this.history;
     }
+
+    public void receiveMessage(Message messageToReceive) {
+    }
 }

@@ -44,4 +44,24 @@ public class UserTest {
 
         assertSame(sender, sender.getChatHistory().getLastMessageSent().getSender());
     }
+
+    @Test
+    void testReceivedMessageAddedToChatHistory() {
+        User sender = new User("Sender");
+        User recipient = new User("Recipient");
+        Message message = new Message(sender, List.of(recipient), TIMESTAMP, "Hello");
+
+        recipient.receiveMessage(message);
+        assertEquals(message, recipient.getChatHistory());
+    }
+
+    @Test
+    void testReceivedMessageNotCountedAsSent() {
+        User sender = new User("Sender");
+        User recipient = new User("Recipient");
+        Message message = new Message(sender, List.of(recipient), TIMESTAMP, "Hello");
+
+        recipient.receiveMessage(message);
+        assertNull(recipient.getChatHistory().getLastMessageSent());
+    }
 }
