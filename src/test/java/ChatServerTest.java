@@ -27,6 +27,6 @@ public class ChatServerTest {
         server.registerUser(user);
         server.unregisterUser(user);
 
-        assertTrue(server.getRegisteredUsers().contains(user));
+        assertFalse(server.getRegisteredUsers().contains(user));
     }
 }
