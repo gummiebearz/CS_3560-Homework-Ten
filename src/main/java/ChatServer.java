@@ -32,13 +32,28 @@ public class ChatServer implements ChatMediator {
     public void sendMessage(Message messageToSend) {
         // Send message to each of recipient in the recipient list
         for(User recipient : messageToSend.getRecipients()) {
-            // Only send to registered user
-            if(registeredUsers.contains(recipient)) {
+            // Only send to registered & non-blocked user
+            if(registeredUsers.contains(recipient) && !isBlocked(recipient, messageToSend.getSender())) {
                 recipient.receiveMessage(messageToSend);
             }
         }
     }
 
+    private boolean isBlocked(User recipient, User sender) {
+        return blockList.getOrDefault(recipient, List.of()).contains(sender);
+    }
+
     @Override
-    public void blockUsers(User currentUser, List<User> usersToBlock) {}
+    public void blockUsers(User currentUser, List<User> usersToBlock) {
+        if(!this.blockList.containsKey(currentUser)) {
+            this.blockList.put(currentUser, new ArrayList<>());
+        }
+
+        List<User> blockedUsers = this.blockList.get(currentUser);
+        for(User user : usersToBlock) {
+            if(!blockedUsers.contains(user)) {
+                blockedUsers.add(user);
+            }
+        }
+    }
 }
