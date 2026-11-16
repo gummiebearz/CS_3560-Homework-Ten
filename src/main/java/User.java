@@ -11,16 +11,19 @@ public class User {
         private String content;
         private LocalDateTime timestamp;
 
-        public MessageMemento(String content, LocalDateTime timestamp) {}
+        public MessageMemento(String content, LocalDateTime timestamp) {
+            this.content = content;
+            this.timestamp = timestamp;
+        }
 
         @Override
         public String getContent() {
-            return "";
+            return this.content;
         }
 
         @Override
         public LocalDateTime getSnapshotDateTime() {
-            return null;
+            return this.timestamp;
         }
     }
 
@@ -51,7 +54,12 @@ public class User {
     public void undoLastMessageSent() {}
 
     public Memento saveSnapshot() {
-        return null;
+        Message lastMessageSent = this.history.getLastMessageSent();
+        if(lastMessageSent == null) {
+            return null;
+        }
+
+        return new MessageMemento(lastMessageSent.getContent(), lastMessageSent.getTimestamp());
     }
 
     public void restoreSnapshot(Memento snapshot) {}
