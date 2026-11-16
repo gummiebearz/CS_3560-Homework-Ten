@@ -1,3 +1,4 @@
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -6,17 +7,21 @@ import java.util.List;
 
 public class ChatServerTest {
     private static final LocalDateTime TIMESTAMP = LocalDateTime.now();
+    private ChatServer server;
+
+    @BeforeEach
+    void setUp() {
+        server = new ChatServer();
+    }
 
     @Test
     void testNewServerHasNoRegisteredUsers() {
-        ChatServer server = new ChatServer();
         assertTrue(server.getRegisteredUsers().isEmpty());
     }
 
     @Test
     void testRegisterUser() {
-        ChatServer server = new ChatServer();
-        User user = new User("New User");
+        User user = new User("New User", server);
 
         server.registerUser(user);
 
@@ -25,8 +30,7 @@ public class ChatServerTest {
 
     @Test
     void testUnregisterUser() {
-        ChatServer server = new ChatServer();
-        User user = new User("New User");
+        User user = new User("New User", server);
 
         server.registerUser(user);
         server.unregisterUser(user);
@@ -36,9 +40,8 @@ public class ChatServerTest {
 
     @Test
     void testSendMessageDeliveredToRecipient() {
-        ChatServer server = new ChatServer();
-        User sender = new User("Sender");
-        User recipient = new User("Recipient");
+        User sender = new User("Sender", server);
+        User recipient = new User("Recipient", server);
 
         server.registerUser(sender);
         server.registerUser(recipient);
@@ -52,10 +55,9 @@ public class ChatServerTest {
 
     @Test
     void testSendMessageDeliveredToMultipleRecipients() {
-        ChatServer server = new ChatServer();
-        User sender = new User("Sender");
-        User firstRecipient = new User("First Recipient");
-        User secondRecipient = new User("Second Recipient");
+        User sender = new User("Sender", server);
+        User firstRecipient = new User("First Recipient", server);
+        User secondRecipient = new User("Second Recipient", server);
 
         server.registerUser(sender);
         server.registerUser(firstRecipient);
@@ -71,10 +73,9 @@ public class ChatServerTest {
 
     @Test
     void testSendMessageDeliveredToRegisteredUsersOnly() {
-        ChatServer server = new ChatServer();
-        User sender = new User("Sender");
-        User firstRecipient = new User("First Recipient");
-        User secondRecipient = new User("Second Recipient");
+        User sender = new User("Sender", server);
+        User firstRecipient = new User("First Recipient", server);
+        User secondRecipient = new User("Second Recipient", server);
 
         server.registerUser(sender);
         server.registerUser(firstRecipient);
@@ -89,10 +90,9 @@ public class ChatServerTest {
 
     @Test
     void testSendMessageDoesNotDeliverToUnlistedUsers() {
-        ChatServer server = new ChatServer();
-        User sender = new User("Sender");
-        User firstRecipient = new User("First Recipient");
-        User secondRecipient = new User("Second Recipient");
+        User sender = new User("Sender", server);
+        User firstRecipient = new User("First Recipient", server);
+        User secondRecipient = new User("Second Recipient", server);
 
         server.registerUser(sender);
         server.registerUser(firstRecipient);
