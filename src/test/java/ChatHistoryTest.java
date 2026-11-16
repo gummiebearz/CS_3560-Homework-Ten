@@ -39,4 +39,35 @@ public class ChatHistoryTest {
 
         assertSame(secondMessage, chatHistory.getLastMessageSent());
     }
+
+    @Test
+    void testPopLastSnapshotReturnsNewest() {
+        User owner =  new User("Owner", server);
+        ChatHistory history = owner.getChatHistory();
+
+        owner.sendMessage(List.of(), "First Message");
+        history.storeSnapshot(owner.saveSnapshot());
+        owner.sendMessage(List.of(), "Second Message");
+        history.storeSnapshot(owner.saveSnapshot());
+
+        assertEquals("Second Message", history.popLastSnapshot().getContent());
+        assertEquals("First Message", history.popLastSnapshot().getContent());
+    }
+
+    @Test
+    void testPopLastSnapshotOnEmptyReturnsNull() {
+        ChatHistory history = new ChatHistory(new User("Owner", server));
+
+        assertNull(history.popLastSnapshot());
+    }
+
+    @Test
+    void testRemoveMessageFromHistory() {
+        User owner = new User("Owner", server);
+        ChatHistory history = new ChatHistory(owner);
+        Message message = new Message(owner, List.of(), TIMESTAMP, "Hello");
+
+        history.removeMessageFromHistory(message);
+        assertTrue(history.getMessages().isEmpty());
+    }
 }
