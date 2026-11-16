@@ -3,6 +3,7 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 import java.time.LocalDateTime;
+import java.util.Iterator;
 import java.util.List;
 
 public class UserTest {
@@ -178,5 +179,21 @@ public class UserTest {
 
         assertDoesNotThrow(sender::undoLastMessageSent);
         assertNull(sender.getChatHistory().getLastMessageSent());
+    }
+
+    @Test
+    void testUserIteratorYieldsMessagesOfGivenUser() {
+        User sender = new User("Sender", server);
+        User recipient = new User("Recipient", server);
+
+        server.registerUser(sender);
+        server.registerUser(recipient);
+
+        sender.sendMessage(List.of(recipient), "Hello");
+
+        Iterator<Message> iterator = sender.iterator(recipient);
+
+        assertEquals("Hello", iterator.next().getContent());
+        assertFalse(iterator.hasNext());
     }
 }
