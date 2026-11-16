@@ -109,7 +109,7 @@ public class UserTest {
         sender.sendMessage(List.of(recipient), "Hello");
 
         assertEquals(1, recipient.getChatHistory().getMessages().size());
-        assertEquals("Hello", recipient.getChatHistory().getLastMessageSent().getContent());
+        assertEquals("Hello", recipient.getChatHistory().getMessages().getLast().getContent());
     }
 
     @Test
