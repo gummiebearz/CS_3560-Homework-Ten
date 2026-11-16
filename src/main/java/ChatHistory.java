@@ -9,6 +9,7 @@ public class ChatHistory {
     public ChatHistory(User owner) {
         this.owner = owner;
         this.history = new ArrayList<>();
+        this.snapshots = new ArrayList<>();
     }
 
     public void addMessageToHistory(Message message) {
@@ -33,11 +34,18 @@ public class ChatHistory {
     }
 
     public void storeSnapshot(Memento snapshot) {
+        this.snapshots.add(snapshot);
     }
 
     public Memento popLastSnapshot() {
-        return null;
+        if(this.snapshots.isEmpty())
+            return null;
+
+        return this.snapshots.removeLast();
     }
 
-    public void removeMessageFromHistory(Message message) {}
+
+    public void removeMessageFromHistory(Message message) {
+        this.history.remove(message);
+    }
 }
