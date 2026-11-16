@@ -1,3 +1,4 @@
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -6,11 +7,17 @@ import java.util.List;
 
 public class ChatHistoryTest {
     private static final LocalDateTime TIMESTAMP = LocalDateTime.now();
+    private ChatServer server;
+
+    @BeforeEach
+    public void setUp() {
+        server = new ChatServer();
+    }
 
     @Test
     void testAddMessageToHistory() {
-        User sender = new User("Sender");
-        User recipient = new User("Recipient");
+        User sender = new User("Sender", server);
+        User recipient = new User("Recipient", server);
         ChatHistory chatHistory = new ChatHistory(sender);
 
         Message message = new Message(sender, List.of(recipient), TIMESTAMP, "Hello");
@@ -21,8 +28,8 @@ public class ChatHistoryTest {
 
     @Test
     void testGetLastMessageSentFromHistory() {
-        User sender = new User("Sender");
-        User recipient = new User("Recipient");
+        User sender = new User("Sender", server);
+        User recipient = new User("Recipient", server);
         ChatHistory chatHistory = new ChatHistory(sender);
 
         Message firstMessage = new Message(sender, List.of(recipient), TIMESTAMP, "Hello");
