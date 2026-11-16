@@ -17,7 +17,7 @@ public class UserTest {
     @Test
     void testGetSameUserName() {
         String name = "Labrador";
-        User sender = new User(name);
+        User sender = new User(name, server);
 
         assertEquals(name, sender.getName());
     }
@@ -25,15 +25,15 @@ public class UserTest {
     @Test
     void testGetUserChatHistory() {
         String name = "Labrador";
-        User sender = new User(name);
+        User sender = new User(name, server);
 
         assertNotNull(sender.getChatHistory());
     }
 
     @Test
     void testMessageRetrievedFromChatHistory() {
-        User sender = new User("Sender");
-        User recipient = new User("Recipient");
+        User sender = new User("Sender", server);
+        User recipient = new User("Recipient", server);
 
         Message message = new Message(sender, List.of(recipient), TIMESTAMP, "Hello");
         sender.getChatHistory().addMessageToHistory(message);
@@ -43,8 +43,8 @@ public class UserTest {
 
     @Test
     void testLastMessageSentBelongsToSender() {
-        User sender = new User("Sender");
-        User recipient = new User("Recipient");
+        User sender = new User("Sender", server);
+        User recipient = new User("Recipient", server);
 
         Message message = new Message(sender, List.of(recipient), TIMESTAMP, "Hello");
         sender.getChatHistory().addMessageToHistory(message);
@@ -54,8 +54,8 @@ public class UserTest {
 
     @Test
     void testReceivedMessageAddedToChatHistory() {
-        User sender = new User("Sender");
-        User recipient = new User("Recipient");
+        User sender = new User("Sender", server);
+        User recipient = new User("Recipient", server);
         Message message = new Message(sender, List.of(recipient), TIMESTAMP, "Hello");
 
         recipient.receiveMessage(message);
@@ -64,8 +64,8 @@ public class UserTest {
 
     @Test
     void testReceivedMessageNotCountedAsSent() {
-        User sender = new User("Sender");
-        User recipient = new User("Recipient");
+        User sender = new User("Sender", server);
+        User recipient = new User("Recipient", server);
         Message message = new Message(sender, List.of(recipient), TIMESTAMP, "Hello");
 
         recipient.receiveMessage(message);
@@ -74,8 +74,8 @@ public class UserTest {
 
     @Test
     void testSendMessageAddedToSenderChatHistory() {
-        User sender = new User("Sender");
-        User recipient = new User("Recipient");
+        User sender = new User("Sender", server);
+        User recipient = new User("Recipient", server);
 
         String content = "Hello";
         sender.sendMessage(List.of(recipient), content);
@@ -85,8 +85,8 @@ public class UserTest {
 
     @Test
     void testSentMessageHasCorrectDetails() {
-        User sender = new User("Sender");
-        User recipient = new User("Recipient");
+        User sender = new User("Sender", server);
+        User recipient = new User("Recipient", server);
 
         String content = "Hello";
         sender.sendMessage(List.of(recipient), content);
