@@ -51,7 +51,13 @@ public class User {
         this.mediator.sendMessage(messageToSend);
     }
 
-    public void undoLastMessageSent() {}
+    public void undoLastMessageSent() {
+        Memento snapshot = this.history.popLastSnapshot();
+
+        if(snapshot != null) {
+            undoSnapshot(snapshot);
+        }
+    }
 
     public Memento saveSnapshot() {
         Message lastMessageSent = this.history.getLastMessageSent();
@@ -62,5 +68,16 @@ public class User {
         return new MessageMemento(lastMessageSent.getContent(), lastMessageSent.getTimestamp());
     }
 
-    public void restoreSnapshot(Memento snapshot) {}
+    public void undoSnapshot(Memento snapshot) {
+        MessageMemento memento = (MessageMemento) snapshot;
+
+        for(Message message : this.history.getMessages()) {
+            if(message.getSender().equals(this)
+            && message.getContent().equals(memento.content)
+            && message.getTimestamp().equals(memento.timestamp)) {
+                this.history.removeMessageFromHistory(message);
+                return;
+            }
+        }
+    }
 }
