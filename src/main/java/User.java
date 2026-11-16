@@ -85,6 +85,6 @@ public class User implements IterableByUser {
 
     @Override
     public Iterator<Message> iterator(User userToSearchWith) {
-        return null;
+        return this.history.iterator(userToSearchWith);
     }
 }
