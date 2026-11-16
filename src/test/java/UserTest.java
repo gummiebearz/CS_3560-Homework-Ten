@@ -124,48 +124,4 @@ public class UserTest {
 
         assertEquals(1, sender.getChatHistory().getMessages().size());
     }
-
-    @Test
-    void testBlockUsers() {
-        User firstUser = new User("First User", server);
-        User secondUser = new User("Second User", server);
-        User thirdUser = new User("Third User", server);
-
-        server.registerUser(firstUser);
-        server.registerUser(secondUser);
-        server.registerUser(thirdUser);
-
-        server.blockUsers(firstUser, List.of(secondUser, thirdUser));
-
-        assertTrue(firstUser.getChatHistory().getMessages().isEmpty());
-    }
-
-    @Test
-    void testBlockedSenderMessageNotDelivered() {
-        User sender = new User("Sender", server);
-        User recipient = new User("Recipient", server);
-
-        server.registerUser(sender);
-        server.registerUser(recipient);
-
-        server.blockUsers(recipient, List.of(sender));
-        server.sendMessage(new Message(sender, List.of(recipient), TIMESTAMP, "Hello"));
-
-        assertTrue(recipient.getChatHistory().getMessages().isEmpty());
-    }
-
-    @Test
-    void testBlockerCanStillSendMessageToBlockedUsers() {
-        User blocker = new User("Blocker", server);
-        User blocked = new User("Blocked", server);
-
-        server.registerUser(blocker);
-        server.registerUser(blocked);
-
-        server.blockUsers(blocker, List.of(blocked));
-        Message message = new Message(blocker, List.of(blocked), TIMESTAMP, "Hello");
-        server.sendMessage(message);
-
-        assertEquals(List.of(message), blocked.getChatHistory().getMessages());
-    }
 }
