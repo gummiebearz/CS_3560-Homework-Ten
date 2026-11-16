@@ -4,6 +4,7 @@ import java.util.List;
 public class ChatHistory {
     private User owner;
     private List<Message> history;
+    private List<Memento> snapshots;
 
     public ChatHistory(User owner) {
         this.owner = owner;
@@ -30,4 +31,11 @@ public class ChatHistory {
     public List<Message> getMessages() {
         return this.history;
     }
+
+    public void storeSnapshot(Memento snapshot) {
+    }
+
+    public void popLastSnapshot() {}
+
+    public void removeMessageFromHistory(Message message) {}
 }
