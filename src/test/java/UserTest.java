@@ -52,7 +52,7 @@ public class UserTest {
         Message message = new Message(sender, List.of(recipient), TIMESTAMP, "Hello");
 
         recipient.receiveMessage(message);
-        assertEquals(message, recipient.getChatHistory());
+        assertEquals(List.of(message), recipient.getChatHistory().getMessages());
     }
 
     @Test
