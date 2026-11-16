@@ -29,7 +29,12 @@ public class ChatServer implements ChatMediator {
     }
 
     @Override
-    public void sendMessage(Message messageToSend) {}
+    public void sendMessage(Message messageToSend) {
+        // Send message to each of recipient in the recipient list
+//        for(User recipient : messageToSend.getRecipients()) {
+//            recipient.receiveMessage(messageToSend);
+//        }
+    }
 
     @Override
     public void blockUsers(User currentUser, List<User> usersToBlock) {}
