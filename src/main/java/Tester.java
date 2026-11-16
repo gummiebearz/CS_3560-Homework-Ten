@@ -10,7 +10,7 @@ public class Tester {
 
         server.registerUser(mickey);
         server.registerUser(minnie);
-        server.registerUser(minnie);
+        server.registerUser(goofie);
 
         System.out.println("=== 1. Send to one user, then to many users ===");
         mickey.sendMessage(List.of(minnie), "Hi Minnie!");
