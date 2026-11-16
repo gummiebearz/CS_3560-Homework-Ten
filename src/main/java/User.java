@@ -4,6 +4,7 @@ public class User {
 
     public User(String name) {
         this.name = name;
+        this.history = new ChatHistory(this);
     }
 
     public String getName() {
@@ -11,6 +12,6 @@ public class User {
     }
 
     public ChatHistory getChatHistory() {
-        return null;
+        return this.history;
     }
 }
