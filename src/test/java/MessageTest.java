@@ -21,9 +21,11 @@ public class MessageTest {
         User sender = new User("Sender");
         User firstRecipient = new User("First Recipient");
         User secondRecipient = new User("Second Recipient");
-        Message message = new Message(sender, List.of(firstRecipient, secondRecipient), TIMESTAMP, "Hello");
 
-        assertSame(List.of(firstRecipient, secondRecipient), message.getRecipients());
+        List<User> recipients = List.of(firstRecipient, secondRecipient);
+        Message message = new Message(sender, recipients, TIMESTAMP, "Hello");
+
+        assertSame(recipients, message.getRecipients());
     }
 
     @Test

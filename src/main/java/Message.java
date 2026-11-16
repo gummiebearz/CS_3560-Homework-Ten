@@ -7,21 +7,26 @@ public class Message {
     private LocalDateTime timestamp;
     private String content;
 
-    public Message(User sender, List<User> recipients, LocalDateTime timestamp, String content) {}
+    public Message(User sender, List<User> recipients, LocalDateTime timestamp, String content) {
+        this.sender = sender;
+        this.recipients = recipients;
+        this.timestamp = timestamp;
+        this.content = content;
+    }
 
     public User getSender() {
-        return null;
+        return this.sender;
     }
 
     public LocalDateTime getTimestamp() {
-        return null;
+        return this.timestamp;
     }
 
     public String getContent() {
-        return "";
+        return this.content;
     }
 
     public List<User> getRecipients() {
-        return null;
+        return this.recipients;
     }
 }
