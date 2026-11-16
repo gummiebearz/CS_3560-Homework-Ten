@@ -1,3 +1,6 @@
+import java.util.List;
+import java.time.LocalDateTime;
+
 public class User {
     private String name;
     private ChatHistory history;
@@ -17,5 +20,8 @@ public class User {
 
     public void receiveMessage(Message messageToReceive) {
         this.history.addMessageToHistory(messageToReceive);
+    }
+
+    public void sendMessage(List<User> recipients, String content) {
     }
 }
