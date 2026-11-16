@@ -6,7 +6,7 @@
   Received from Mickey: Hi Minnie!
   Sent to Mickey, Goofie: Hello everyone!
 --- Goofie's chat history ---
-  (no messages)
+  Received from Minnie: Hello everyone!
 
 === 2. Goofie blocks Mickey ===
 --- Minnie's chat history ---
@@ -14,7 +14,7 @@
   Sent to Mickey, Goofie: Hello everyone!
   Received from Mickey: Hey both of you!
 --- Goofie's chat history ---
-  (no messages)
+  Received from Minnie: Hello everyone!
 
 === 3. Mickey undoes his last message ===
 --- Mickey's chat history ---
