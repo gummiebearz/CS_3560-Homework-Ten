@@ -1,3 +1,4 @@
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -6,6 +7,12 @@ import java.util.List;
 
 public class UserTest {
     private static final LocalDateTime TIMESTAMP = LocalDateTime.now();
+    private ChatServer server;
+
+    @BeforeEach
+    void setUp() {
+        server = new ChatServer();
+    }
 
     @Test
     void testGetSameUserName() {
@@ -89,5 +96,32 @@ public class UserTest {
         assertEquals(List.of(recipient), sentMessage.getRecipients());
         assertEquals(content, sentMessage.getContent());
         assertNotNull(sentMessage.getTimestamp());
+    }
+
+    @Test
+    void testSendMessageDeliveredToRecipientThroughMediator() {
+        User sender = new User("Sender", server);
+        User recipient = new User("Recipient", server);
+
+        server.registerUser(sender);
+        server.registerUser(recipient);
+
+        sender.sendMessage(List.of(recipient), "Hello");
+
+        assertEquals(1, recipient.getChatHistory().getMessages().size());
+        assertEquals("Hello", recipient.getChatHistory().getLastMessageSent().getContent());
+    }
+
+    @Test
+    void testSendMessageDoesNotDuplicateInSenderHistory() {
+        User sender = new User("Sender", server);
+        User recipient = new User("Recipient", server);
+
+        server.registerUser(sender);
+        server.registerUser(recipient);
+
+        sender.sendMessage(List.of(recipient), "Hello");
+
+        assertEquals(1, sender.getChatHistory().getMessages().size());
     }
 }
