@@ -31,9 +31,12 @@ public class ChatServer implements ChatMediator {
     @Override
     public void sendMessage(Message messageToSend) {
         // Send message to each of recipient in the recipient list
-//        for(User recipient : messageToSend.getRecipients()) {
-//            recipient.receiveMessage(messageToSend);
-//        }
+        for(User recipient : messageToSend.getRecipients()) {
+            // Only send to registered user
+            if(registeredUsers.contains(recipient)) {
+                recipient.receiveMessage(messageToSend);
+            }
+        }
     }
 
     @Override
