@@ -1,7 +1,8 @@
+import java.util.Iterator;
 import java.util.List;
 import java.time.LocalDateTime;
 
-public class User {
+public class User implements IterableByUser {
     private String name;
     private ChatHistory history;
     private ChatMediator mediator;
@@ -80,5 +81,10 @@ public class User {
                 return;
             }
         }
+    }
+
+    @Override
+    public Iterator<Message> iterator(User userToSearchWith) {
+        return null;
     }
 }
