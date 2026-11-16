@@ -1,3 +1,4 @@
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -6,11 +7,17 @@ import java.util.List;
 
 public class MessageTest {
     private static final LocalDateTime TIMESTAMP = LocalDateTime.now();
+    private ChatServer server;
+
+    @BeforeEach
+    void setUp() {
+        server = new ChatServer();
+    }
 
     @Test
     void testGetSameSender() {
-        User sender = new User("Sender");
-        User recipient = new User("Recipient");
+        User sender = new User("Sender", server);
+        User recipient = new User("Recipient", server);
         Message message = new Message(sender, List.of(recipient), TIMESTAMP, "Hello");
 
         assertSame(sender, message.getSender());
@@ -18,9 +25,9 @@ public class MessageTest {
 
     @Test
     void testGetSameRecipients() {
-        User sender = new User("Sender");
-        User firstRecipient = new User("First Recipient");
-        User secondRecipient = new User("Second Recipient");
+        User sender = new User("Sender", server);
+        User firstRecipient = new User("First Recipient", server);
+        User secondRecipient = new User("Second Recipient", server);
 
         List<User> recipients = List.of(firstRecipient, secondRecipient);
         Message message = new Message(sender, recipients, TIMESTAMP, "Hello");
@@ -30,8 +37,8 @@ public class MessageTest {
 
     @Test
     void testGetSameTimestamp() {
-        User sender = new User("Sender");
-        User recipient = new User("Recipient");
+        User sender = new User("Sender", server);
+        User recipient = new User("Recipient", server);
 
         LocalDateTime now = TIMESTAMP;
         Message message = new Message(sender, List.of(recipient), now, "Hello");
@@ -41,8 +48,8 @@ public class MessageTest {
 
     @Test
     void testGetSameContent() {
-        User sender = new User("Sender");
-        User recipient = new User("Recipient");
+        User sender = new User("Sender", server);
+        User recipient = new User("Recipient", server);
         Message message = new Message(sender, List.of(recipient), TIMESTAMP, "Hello");
 
         assertSame("Hello", message.getContent());
