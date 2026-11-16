@@ -64,4 +64,30 @@ public class UserTest {
         recipient.receiveMessage(message);
         assertNull(recipient.getChatHistory().getLastMessageSent());
     }
+
+    @Test
+    void testSendMessageAddedToSenderChatHistory() {
+        User sender = new User("Sender");
+        User recipient = new User("Recipient");
+
+        String content = "Hello";
+        sender.sendMessage(List.of(recipient), content);
+
+        assertNotNull(sender.getChatHistory().getLastMessageSent());
+    }
+
+    @Test
+    void testSentMessageHasCorrectDetails() {
+        User sender = new User("Sender");
+        User recipient = new User("Recipient");
+
+        String content = "Hello";
+        sender.sendMessage(List.of(recipient), content);
+        Message sentMessage = sender.getChatHistory().getLastMessageSent();
+
+        assertSame(sender, sentMessage.getSender());
+        assertEquals(List.of(recipient), sentMessage.getRecipients());
+        assertEquals(content, sentMessage.getContent());
+        assertNotNull(sentMessage.getTimestamp());
+    }
 }
