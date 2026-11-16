@@ -25,4 +25,10 @@ public class ChatServer implements ChatMediator {
     public List<User> getRegisteredUsers() {
         return this.registeredUsers;
     }
+
+    @Override
+    public void sendMessage(Message messageToSend) {}
+
+    @Override
+    public void blockUsers(User currentUser, List<User> usersToBlock) {}
 }
