@@ -26,4 +26,8 @@ public class ChatHistory {
 
         return null;
     }
+
+    public List<Message> getMessages() {
+        return this.history;
+    }
 }
