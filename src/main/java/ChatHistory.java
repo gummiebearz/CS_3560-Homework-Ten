@@ -52,6 +52,6 @@ public class ChatHistory implements IterableByUser {
 
     @Override
     public Iterator<Message> iterator(User userToSearchWith) {
-        return null;
+        return new searchMessagesByUser(this.history, userToSearchWith);
     }
 }
