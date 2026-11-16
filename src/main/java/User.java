@@ -23,5 +23,7 @@ public class User {
     }
 
     public void sendMessage(List<User> recipients, String content) {
+        Message messageToSend = new Message(this, recipients, LocalDateTime.now(), content);
+        this.history.addMessageToHistory(messageToSend);
     }
 }
