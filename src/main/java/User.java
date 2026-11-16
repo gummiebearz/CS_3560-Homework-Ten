@@ -22,6 +22,7 @@ public class User {
     // Added stub methods
     public void sendMessage(List<User> recipients, Message messageToSend) {
         this.chatHistory.addMessageToHistory(messageToSend);
+        chatMediator.sendMessage(messageToSend);
     }
     public void receiveMessage(Message messageToReceive) {}
 }
