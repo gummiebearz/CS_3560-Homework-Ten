@@ -6,6 +6,23 @@ public class User {
     private ChatHistory history;
     private ChatMediator mediator;
 
+    private class MessageMemento implements Memento {
+        private String content;
+        private LocalDateTime timestamp;
+
+        public MessageMemento(String content, LocalDateTime timestamp) {}
+
+        @Override
+        public String getContent() {
+            return "";
+        }
+
+        @Override
+        public LocalDateTime getSnapshotDateTime() {
+            return null;
+        }
+    }
+
     public User(String name, ChatMediator mediator) {
         this.name = name;
         this.history = new ChatHistory(this);
