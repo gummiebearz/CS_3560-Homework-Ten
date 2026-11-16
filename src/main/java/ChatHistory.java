@@ -1,7 +1,8 @@
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
-public class ChatHistory {
+public class ChatHistory implements IterableByUser {
     private User owner;
     private List<Message> history;
     private List<Memento> snapshots;
@@ -47,5 +48,10 @@ public class ChatHistory {
 
     public void removeMessageFromHistory(Message message) {
         this.history.remove(message);
+    }
+
+    @Override
+    public Iterator<Message> iterator(User userToSearchWith) {
+        return null;
     }
 }
