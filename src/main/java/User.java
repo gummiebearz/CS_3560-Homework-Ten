@@ -29,4 +29,6 @@ public class User {
         this.history.addMessageToHistory(messageToSend);
         this.mediator.sendMessage(messageToSend);
     }
+
+    public void undoLastMessageSent() {}
 }
