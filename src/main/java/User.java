@@ -49,4 +49,10 @@ public class User {
     }
 
     public void undoLastMessageSent() {}
+
+    public Memento saveSnapshot() {
+        return null;
+    }
+
+    public void restoreSnapshot(Memento snapshot) {}
 }
