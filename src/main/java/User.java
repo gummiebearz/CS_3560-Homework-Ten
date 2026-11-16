@@ -6,7 +6,8 @@ public class User {
     private ChatHistory history;
     private ChatMediator mediator;
 
-    private class MessageMemento implements Memento {
+    // Declared as static because the memento just holds copied values
+    private static class MessageMemento implements Memento {
         private String content;
         private LocalDateTime timestamp;
 
