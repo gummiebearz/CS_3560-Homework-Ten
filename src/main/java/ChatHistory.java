@@ -35,7 +35,9 @@ public class ChatHistory {
     public void storeSnapshot(Memento snapshot) {
     }
 
-    public void popLastSnapshot() {}
+    public Memento popLastSnapshot() {
+        return null;
+    }
 
     public void removeMessageFromHistory(Message message) {}
 }
