@@ -3,6 +3,8 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 public class ChatHistoryTest {
@@ -67,5 +69,44 @@ public class ChatHistoryTest {
 
         history.removeMessageFromHistory(message);
         assertTrue(history.getMessages().isEmpty());
+    }
+
+    @Test
+    void testIteratorOnEmptyHistoryHasNoNext() {
+        User user = new User("User", server);
+
+        assertFalse(user.getChatHistory().iterator(user).hasNext());
+    }
+
+    @Test
+    void testIteratorYieldsMessageSentByUser() {
+        User sender = new User("Sender", server);
+        User recipient = new User("Recipient", server);
+
+        Message message = new Message(sender, List.of(recipient), TIMESTAMP, "Hello");
+        sender.getChatHistory().addMessageToHistory(message);
+
+        Iterator<Message> iterator = sender.getChatHistory().iterator(sender);
+
+        assertSame(message, iterator.next());
+        assertFalse(iterator.hasNext());
+    }
+
+    @Test
+    void testIteratorKeepsMessageOrder() {
+        User sender = new User("Sender", server);
+        User recipient = new User("Recipient", server);
+
+        Message firstMessage = new Message(sender, List.of(recipient), TIMESTAMP, "First Message");
+        Message secondMessage = new Message(recipient, List.of(sender), TIMESTAMP, "Second Message");
+
+        sender.getChatHistory().addMessageToHistory(firstMessage);
+        sender.getChatHistory().addMessageToHistory(secondMessage);
+
+        Iterator<Message> iterator = sender.getChatHistory().iterator(sender);
+
+        assertSame(firstMessage, iterator.next());
+        assertSame(secondMessage, iterator.next());
+        assertFalse(iterator.hasNext());
     }
 }
