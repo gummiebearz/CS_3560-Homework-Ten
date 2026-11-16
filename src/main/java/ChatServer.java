@@ -14,7 +14,9 @@ public class ChatServer implements ChatMediator {
 
     @Override
     public void registerUser(User userToRegister) {
-        this.registeredUsers.add(userToRegister);
+        if(!registeredUsers.contains(userToRegister)) {
+            this.registeredUsers.add(userToRegister);
+        }
     }
 
     @Override
