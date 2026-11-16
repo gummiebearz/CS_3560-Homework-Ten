@@ -46,9 +46,7 @@ public class ChatHistoryTest {
         ChatHistory history = owner.getChatHistory();
 
         owner.sendMessage(List.of(), "First Message");
-        history.storeSnapshot(owner.saveSnapshot());
         owner.sendMessage(List.of(), "Second Message");
-        history.storeSnapshot(owner.saveSnapshot());
 
         assertEquals("Second Message", history.popLastSnapshot().getContent());
         assertEquals("First Message", history.popLastSnapshot().getContent());
