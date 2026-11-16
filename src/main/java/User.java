@@ -16,5 +16,6 @@ public class User {
     }
 
     public void receiveMessage(Message messageToReceive) {
+        this.history.addMessageToHistory(messageToReceive);
     }
 }
