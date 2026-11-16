@@ -117,6 +117,8 @@ public class ChatServerTest {
         server.registerUser(thirdUser);
 
         server.blockUsers(firstUser, List.of(secondUser, thirdUser));
+        server.sendMessage(new Message(secondUser, List.of(firstUser), TIMESTAMP, "Hello First User"));
+        server.sendMessage(new Message(thirdUser, List.of(firstUser), TIMESTAMP, "Hello First User"));
 
         assertTrue(firstUser.getChatHistory().getMessages().isEmpty());
     }
