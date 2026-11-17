@@ -1,3 +1,4 @@
+import java.util.Iterator;
 import java.util.List;
 
 public class Tester {
@@ -29,6 +30,10 @@ public class Tester {
         mickey.undoLastMessageSent();
         printHistory(mickey);   // message removed
         printHistory(minnie);   // still has it (undo affects the sender only)
+
+        System.out.println("\n=== 4. Iterate Minnie's history by a specific user ===");
+        printMessagesBy(minnie, mickey);
+        printMessagesBy(minnie, goofie);
     }
 
     // Prints one user's chat history, marking each message as sent or received
@@ -58,6 +63,22 @@ public class Tester {
             }
 
             System.out.println("  " + description + ": " + message.getContent());
+        }
+    }
+
+    // Uses the iterator to print the messages in owner's history that the given user sent or received
+    private static void printMessagesBy(User owner, User userToSearchWith) {
+        System.out.println("--- " + owner.getName() + "'s messages involving " + userToSearchWith.getName() + " ---");
+
+        Iterator<Message> iterator = owner.iterator(userToSearchWith);
+        if(!iterator.hasNext()) {
+            System.out.println("  (no messages)");
+            return;
+        }
+
+        while(iterator.hasNext()) {
+            Message message = iterator.next();
+            System.out.println("  " + message.getSender().getName() + ": " + message.getContent());
         }
     }
 }
